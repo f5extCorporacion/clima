@@ -1,0 +1,16 @@
+Instalaciones necesarias para correo app
+
+npm i axios
+
+install 
+npm install -D tailwindcss postcss autoprefixer
+
+config
+ "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    
+    se agrega en  style.css
+
+    @tailwind base;
+@tailwind components;
+@tailwind utilities;
