@@ -1,7 +1,4 @@
-# React + Vite App Clima
+#  App Clima
 
-Codigo creado por Franklim de jesus muñoz valverde
-link de app desplegada : https://clima-smoky-gamma.vercel.app/
-
--Aplicación del Clima que nos permite tener la ubicación del usuario
--y poder saber que clima es en su ciudad.
+Saludos a todos los visitantes  para poder validar la informacion del clima deben activar la ubicacion del navegador,
+pues trabajo con una api que nos brinda la informacion y enviamos a validar ese requisito para una experiencia de usuario correcta
