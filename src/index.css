@@ -1,22 +1,274 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,900&family=Lexend+Deca:wght@400;700&family=Open+Sans:ital,wght@0,400;1,300;1,600;1,700&family=Poppins:ital,wght@0,100;0,300;0,400;0,600;0,900;1,100;1,400;1,700&family=Roboto+Condensed:ital,wght@0,300;1,400;1,700&display=swap');
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
- body{
-    background:url("./assets/fondo.jpg");
-    height: 100%;
-    background-position: center center;
-    box-shadow: 1px 1px  1px #202020;
- }
- body2{
-   background:#202020;
+/* Variables de colores */
+:root {
+  --light-bg: #e0e5ec;
+  --light-card: #e0e5ec;
+  --light-text: #2d3a4b;
+  --light-shadow-dark: #b8bec9;
+  --light-shadow-light: #ffffff;
+  
+  --dark-bg: #1a1e24;
+  --dark-card: #1e242b;
+  --dark-text: #e4e6eb;
+  --dark-shadow-dark: #0b0d0f;
+  --dark-shadow-light: #2d3540;
+  
+  --glass-light: rgba(255, 255, 255, 0.25);
+  --glass-dark: rgba(0, 0, 0, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.18);
 }
- button{
-    background: #5f5e5e;
-    padding: 1rem;
-    border-radius: 30px;
-    opacity: 0.5;
- }
 
+/* Contenedor principal */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  transition: background 0.3s ease;
+}
 
+.app-container.light-mode {
+  background: var(--light-bg);
+}
 
+.app-container.dark-mode {
+  background: var(--dark-bg);
+}
+
+/* Tarjeta principal */
+.weather-card {
+  max-width: 500px;
+  width: 100%;
+  padding: 30px;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  background: transparent;
+}
+
+/* Estilos Neumorphy */
+.neumorph-light {
+  background: var(--light-card);
+  box-shadow: 
+    9px 9px 16px var(--light-shadow-dark),
+    -9px -9px 16px var(--light-shadow-light);
+  border-radius: 30px;
+  color: var(--light-text);
+}
+
+.neumorph-dark {
+  background: var(--dark-card);
+  box-shadow: 
+    9px 9px 16px var(--dark-shadow-dark),
+    -9px -9px 16px var(--dark-shadow-light);
+  border-radius: 30px;
+  color: var(--dark-text);
+}
+
+/* Estilos Glassmorphism */
+.glass-effect {
+  background: var(--glass-light);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 30px;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  padding: 20px;
+}
+
+.dark-mode .glass-effect {
+  background: var(--glass-dark);
+}
+
+/* Botón de tema */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.theme-toggle svg {
+  fill: currentColor;
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+/* Ubicación */
+.location {
+  text-align: center;
+  padding: 15px;
+}
+
+.location h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Grid principal */
+.weather-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 640px) {
+  .weather-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Tarjeta principal de clima */
+.main-weather-card {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.weather-description {
+  margin: 0;
+  font-size: 20px;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.temperature-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.temperature-value {
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.weather-icon {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.weather-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Grid de estadísticas */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  padding: 20px;
+}
+
+@media (min-width: 640px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Botón de cambio de unidad */
+.unit-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  width: 120px;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+}
+
+.unit-toggle:active {
+  transform: scale(0.95);
+}
+
+.toggle-divider {
+  opacity: 0.5;
+}
+
+.toggle-indicator {
+  position: absolute;
+  bottom: 8px;
+  left: 20px;
+  width: 28px;
+  height: 3px;
+  background: currentColor;
+  border-radius: 3px;
+  transition: transform 0.3s ease;
+}
+
+/* Animaciones */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.main-weather-card {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Hover effects */
+.main-weather-card:hover,
+.stat-card:hover,
+.theme-toggle:hover,
+.unit-toggle:hover {
+  transform: translateY(-2px);
+  transition: transform 0.3s ease;
+}
+
+/* Estilos para los componentes Render existentes */
+.stat-card img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+}
+
+.stat-card p {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.stat-card small {
+  font-size: 12px;
+  opacity: 0.8;
+}
